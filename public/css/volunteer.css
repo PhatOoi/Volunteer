@@ -1,0 +1,98 @@
+/* =====================================================
+   public/css/volunteer.css  -  CSS cho các trang của tình nguyện viên
+   (dashboard, hồ sơ, chi tiết hoạt động, thông báo...)
+   Nạp SAU pages.css.
+   ===================================================== */
+
+/* ---------- DASHBOARD: banner chào ---------- */
+.welcome-banner {
+    background: linear-gradient(135deg, var(--vl-primary), #157a45);
+    color: #fff; border-radius: var(--vl-radius); padding: 1.5rem; margin-bottom: 1.25rem;
+}
+.welcome-banner h2 { color: #fff; margin-bottom: .25rem; }
+.welcome-banner p { color: rgba(255, 255, 255, .9); margin: 0; }
+
+/* ---------- DÒNG HOẠT ĐỘNG NẰM NGANG (dashboard, hoạt động của tôi) ---------- */
+.activity-row { display: flex; gap: 1rem; padding: 1rem; align-items: stretch; margin-bottom: 1rem; }
+.activity-row .row-thumb {
+    position: relative; width: 150px; min-height: 120px; flex-shrink: 0; border-radius: 10px; overflow: hidden;
+}
+.activity-row .row-thumb .thumb-icon { font-size: 2.4rem; }
+.activity-row .row-body { flex: 1; min-width: 0; }
+.activity-row .row-actions { display: flex; flex-direction: column; justify-content: center; gap: .5rem; flex-shrink: 0; }
+
+/* ---------- LỌC / PHÂN TRANG / TRẠNG THÁI RỖNG ---------- */
+.filter-card { padding: 1.1rem 1.25rem; margin-bottom: 1.25rem; }
+.empty-state { text-align: center; padding: 3rem 1rem; color: var(--vl-muted); }
+.empty-state i { font-size: 2.6rem; display: block; margin-bottom: .5rem; }
+.pagination {
+    --bs-pagination-color: var(--vl-primary-dark);
+    --bs-pagination-hover-color: var(--vl-primary-dark);
+    --bs-pagination-focus-color: var(--vl-primary-dark);
+    --bs-pagination-active-bg: var(--vl-primary);
+    --bs-pagination-active-border-color: var(--vl-primary);
+    --bs-pagination-focus-box-shadow: 0 0 0 .2rem rgba(31, 157, 85, .15);
+}
+
+/* ---------- CHI TIẾT HOẠT ĐỘNG ---------- */
+.detail-banner {
+    position: relative; height: 200px; border-radius: var(--vl-radius); overflow: hidden; margin-bottom: 1.25rem;
+}
+.detail-banner .thumb-icon { font-size: 5rem; }
+.detail-section { margin-top: 1.5rem; }
+.detail-section h5 { margin-bottom: .7rem; }
+.detail-list { list-style: none; padding: 0; margin: 0; }
+.detail-list li { display: flex; gap: .6rem; margin-bottom: .55rem; }
+.detail-list li i { color: var(--vl-primary); margin-top: .2rem; }
+.note-box { background: var(--vl-accent-soft); border-radius: 10px; padding: 1rem 1.1rem; }
+.note-box .detail-list li i { color: var(--vl-accent); }
+
+.info-list { list-style: none; padding: 0; margin: 0; }
+.info-list li { display: flex; gap: .75rem; padding: .7rem 0; border-bottom: 1px solid var(--vl-border); }
+.info-list li:last-child { border-bottom: 0; }
+.info-list .info-icon {
+    width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+    display: grid; place-items: center; background: var(--vl-primary-soft); color: var(--vl-primary);
+}
+.info-list small { display: block; color: var(--vl-muted); }
+
+/* ---------- HỒ SƠ ---------- */
+.profile-cover {
+    height: 110px; border-radius: var(--vl-radius) var(--vl-radius) 0 0;
+    background: linear-gradient(135deg, var(--vl-dark), var(--vl-primary));
+}
+.profile-avatar-wrap { margin-top: -48px; text-align: center; }
+.profile-avatar-wrap .avatar-lg { border: 4px solid #fff; box-shadow: var(--vl-shadow); }
+.profile-field { padding: .8rem 0; border-bottom: 1px solid var(--vl-border); }
+.profile-field small { display: block; color: var(--vl-muted); }
+.profile-mini-stat { text-align: center; }
+.profile-mini-stat strong { display: block; font-size: 1.3rem; }
+.profile-mini-stat span { color: var(--vl-muted); font-size: .8rem; }
+
+/* ---------- THÔNG BÁO ---------- */
+.notice { display: flex; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--vl-border); }
+.notice:last-child { border-bottom: 0; }
+.notice.unread { background: #f3faf6; }
+.notice-icon {
+    width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0; font-size: 1.2rem;
+    display: grid; place-items: center; background: var(--vl-primary-soft); color: var(--vl-primary);
+}
+.notice-icon.blue   { background: var(--vl-blue-soft);   color: var(--vl-blue); }
+.notice-icon.accent { background: var(--vl-accent-soft); color: var(--vl-accent); }
+.notice-icon.danger { background: #fdeaea; color: #c0392b; }
+.notice-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--vl-accent); flex-shrink: 0; margin-top: .55rem; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (min-width: 768px) {
+    .detail-banner { height: 280px; }
+    .detail-banner .thumb-icon { font-size: 6.5rem; }
+}
+@media (min-width: 992px) {
+    .sticky-side { position: sticky; top: 90px; }
+}
+@media (max-width: 767.98px) {
+    .activity-row { flex-direction: column; }
+    .activity-row .row-thumb { width: 100%; min-height: 0; height: 130px; }
+    .activity-row .row-actions { flex-direction: row; }
+    .activity-row .row-actions .btn { flex: 1; }
+}

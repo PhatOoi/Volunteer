@@ -1,0 +1,109 @@
+/* =====================================================
+   public/css/pages.css  -  CSS riêng cho từng trang
+   (trang chủ, đăng nhập/đăng ký, ảnh card hoạt động...)
+   Nạp SAU app.css.
+   ===================================================== */
+
+/* ---------- ẢNH NỀN CARD HOẠT ĐỘNG (chưa có ảnh thật nên dùng màu + icon) ---------- */
+.thumb-green  { background: linear-gradient(135deg, #bfe9cf, #6cc392); }
+.thumb-blue   { background: linear-gradient(135deg, #c7d9ff, #7ea4f5); }
+.thumb-orange { background: linear-gradient(135deg, #ffe2a8, #f7b955); }
+.thumb-teal   { background: linear-gradient(135deg, #bfe8e6, #5fbab4); }
+.thumb-icon {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    font-size: 3.2rem; color: rgba(255, 255, 255, .92);
+}
+.activity-thumb .badge-corner { z-index: 1; }
+
+/* ---------- TRANG CHỦ: HERO ---------- */
+.hero {
+    background: linear-gradient(135deg, var(--vl-dark) 0%, #145a63 55%, #1a7f5a 100%);
+    color: #fff; padding: 3rem 0 3.5rem; position: relative; overflow: hidden;
+}
+.hero::after {
+    content: ""; position: absolute; right: -120px; top: -120px;
+    width: 380px; height: 380px; border-radius: 50%; background: rgba(255, 255, 255, .05);
+}
+.hero .container { position: relative; z-index: 1; }
+.hero-tag {
+    display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1rem;
+    background: rgba(255, 255, 255, .12); padding: .35rem .9rem; border-radius: 999px; font-size: .85rem;
+}
+.hero-title { color: #fff; font-size: 1.9rem; font-weight: 700; line-height: 1.3; }
+.hero-title span { color: #ffd37a; }
+.hero-lead { color: rgba(255, 255, 255, .85); font-size: 1.02rem; margin: 1rem 0 1.5rem; }
+.hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+.hero-stat {
+    background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: var(--vl-radius); padding: 1rem .5rem; text-align: center;
+}
+.hero-stat strong { display: block; font-size: 1.3rem; line-height: 1.2; }
+.hero-stat span { font-size: .78rem; opacity: .85; }
+
+/* ---------- TRANG CHỦ: CÁC KHỐI ---------- */
+.section { padding: 3rem 0; }
+.section-title { text-align: center; margin-bottom: 2rem; }
+.section-title h2 { font-weight: 700; }
+.section-title p { color: var(--vl-muted); max-width: 560px; margin: .4rem auto 0; }
+
+.feature-card { padding: 1.5rem; height: 100%; text-align: center; }
+.feature-icon {
+    width: 64px; height: 64px; border-radius: 18px; margin: 0 auto 1rem;
+    display: grid; place-items: center; font-size: 1.8rem;
+    background: var(--vl-primary-soft); color: var(--vl-primary);
+}
+.feature-icon.blue   { background: var(--vl-blue-soft);   color: var(--vl-blue); }
+.feature-icon.accent { background: var(--vl-accent-soft); color: var(--vl-accent); }
+
+.step { text-align: center; padding: 0 .5rem; }
+.step-number {
+    width: 48px; height: 48px; border-radius: 50%; margin: 0 auto .75rem;
+    background: var(--vl-primary); color: #fff; font-weight: 700; font-size: 1.2rem;
+    display: grid; place-items: center;
+}
+
+.cta-band {
+    background: linear-gradient(135deg, var(--vl-primary), #157a45);
+    color: #fff; border-radius: var(--vl-radius); padding: 2.25rem 1.5rem; text-align: center;
+}
+.cta-band h2 { color: #fff; }
+.cta-band p { color: rgba(255, 255, 255, .9); }
+
+/* ---------- ĐĂNG NHẬP / ĐĂNG KÝ ---------- */
+.auth-wrap { min-height: 100vh; display: flex; }
+.auth-side {
+    display: none; flex: 1; flex-direction: column; justify-content: space-between;
+    padding: 3rem; color: #fff;
+    background: linear-gradient(145deg, var(--vl-dark), #146a63 60%, var(--vl-primary));
+}
+.auth-side h2 { color: #fff; font-size: 2rem; font-weight: 700; line-height: 1.3; }
+.auth-side ul { list-style: none; padding: 0; margin: 1.5rem 0 0; }
+.auth-side li { margin-bottom: .75rem; display: flex; gap: .6rem; align-items: flex-start; }
+.auth-side li i { color: #ffd37a; margin-top: .15rem; }
+.auth-brand { display: flex; align-items: center; gap: .7rem; color: #fff; text-decoration: none; font-weight: 700; font-size: 1.1rem; }
+.auth-brand:hover { color: #fff; }
+.auth-brand .logo {
+    width: 42px; height: 42px; border-radius: 12px; background: var(--vl-primary);
+    display: grid; place-items: center; font-size: 1.3rem;
+}
+.auth-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 1.5rem; background: #fff; }
+.auth-box { width: 100%; max-width: 440px; }
+.auth-box .auth-brand-mobile { color: var(--vl-text); margin-bottom: 1.5rem; }
+.auth-box .auth-brand-mobile:hover { color: var(--vl-text); }
+.auth-box h1 { font-size: 1.6rem; font-weight: 700; }
+
+/* Ô nhập có icon: bo góc đồng bộ */
+.input-group-text { background: #f1f6f4; color: var(--vl-muted); border-color: #d5dedb; }
+.input-group > .input-group-text:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (min-width: 992px) {
+    .hero { padding: 5rem 0 5.5rem; }
+    .hero-title { font-size: 2.7rem; }
+    .hero-stat strong { font-size: 1.6rem; }
+    .auth-side { display: flex; }
+    .auth-main { flex: 0 0 52%; }
+}
+@media (max-width: 575.98px) {
+    .section { padding: 2.25rem 0; }
+}
