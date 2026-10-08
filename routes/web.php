@@ -49,9 +49,9 @@ Route::prefix('volunteer')->name('volunteer.')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
+    // Danh sách + chi tiết hoạt động (form đăng ký nằm ngay trong trang chi tiết)
     Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
     Route::get('/activities/{id}', [ActivityController::class, 'show'])->name('activities.show');
-    Route::get('/activities/{id}/register', [ActivityController::class, 'registerForm'])->name('activities.register');
     Route::post('/activities/{id}/register', [ActivityController::class, 'storeRegistration'])->name('activities.register.store');
 
     Route::get('/my-activities', [MyActivityController::class, 'index'])->name('my-activities');

@@ -21,24 +21,25 @@ class ActivityController extends Controller
         return view('volunteer.activities', compact('activities', 'categories', 'locations', 'months'));
     }
 
-    // Chi tiết hoạt động
+    // Chi tiết hoạt động (đã gồm luôn form đăng ký ở cuối trang)
     public function show($id)
     {
         $activity = DemoData::activity((int) $id);   // TODO: Activity::findOrFail($id)
         abort_if(!$activity, 404);
 
         $isRegistered = in_array($activity['id'], DemoData::registeredIds());
+        $user = DemoData::user();                    // TODO: auth()->user() - để điền sẵn vào form
 
-        return view('volunteer.activity-detail', compact('activity', 'isRegistered'));
+        return view('volunteer.activity-detail', compact('activity', 'isRegistered', 'user'));
     }
 
-    // Hiện form đăng ký tham gia
-    public function registerForm($id)
+    // Nhận form đăng ký: kiểm tra điều kiện, validate rồi báo thành công
+    public function storeRegistration(Request $request, $id)
     {
         $activity = DemoData::activity((int) $id);
         abort_if(!$activity, 404);
 
-        // Đã đăng ký rồi thì quay về trang chi tiết
+        // Đã đăng ký rồi
         if (in_array($activity['id'], DemoData::registeredIds())) {
             return redirect()->route('volunteer.activities.show', $id)
                 ->with('error', 'Bạn đã đăng ký hoạt động này rồi.');
@@ -48,17 +49,6 @@ class ActivityController extends Controller
             return redirect()->route('volunteer.activities.show', $id)
                 ->with('error', 'Hoạt động này không còn nhận đăng ký.');
         }
-
-        $user = DemoData::user();
-
-        return view('volunteer.activity-register', compact('activity', 'user'));
-    }
-
-    // Nhận form đăng ký: validate rồi báo thành công
-    public function storeRegistration(Request $request, $id)
-    {
-        $activity = DemoData::activity((int) $id);
-        abort_if(!$activity, 404);
 
         $request->validate([
             'name' => 'required|string|max:100',
