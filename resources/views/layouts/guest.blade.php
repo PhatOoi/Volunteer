@@ -22,7 +22,12 @@
     </span>
     <!-- <span class="brand-text">Tình Nguyện Xanh</span> -->
 </a>
-
+ <a href="{{ url('/') }}" class="navbar-brand vl-brand">
+    <span class="logo">
+        <img src="{{ asset('images/logoso.png') }}" alt="Tình Nguyện Xanh">
+    </span>
+    <!-- <span class="brand-text">Tình Nguyện Xanh</span> -->
+</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#guestNav"
                 aria-controls="guestNav" aria-expanded="false" aria-label="Mở menu">
             <span class="navbar-toggler-icon"></span>
@@ -37,8 +42,8 @@
             </ul>
 
             <div class="d-grid gap-2 d-lg-flex mt-3 mt-lg-0">
-                <a href="{{ route('login') }}" class="btn btn-outline-light">Đăng nhập</a>
-                <a href="{{ route('register') }}" class="btn btn-accent">Đăng ký</a>
+                <a href="{{ route('login') }}" class="btn btn-accent">Đăng nhập</a>
+                <!-- <a href="{{ route('register') }}" class="btn btn-accent">Đăng ký</a> -->
             </div>
         </div>
     </div>

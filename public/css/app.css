@@ -38,7 +38,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 { font-weight: 600; color: var(--vl-text); }
 h1 { font-size: 1.75rem; }
-h2 { font-size: 1.4rem; }
+h2 { font-size: 1.4rem; padding: 22px;}
 h3 { font-size: 1.2rem; }
 .text-muted { color: var(--vl-muted) !important; }
 
@@ -220,18 +220,18 @@ textarea.form-control { min-height: 100px; }
 .notify-menu { width: 320px; max-width: calc(100vw - 2rem); }
 
 /* ---------- 10. VOLUNTEER: NAVBAR + FOOTER ---------- */
-.vl-navbar { background: var(--vl-dark); padding-top: .6rem; padding-bottom: .6rem; }
+.vl-navbar { background: #fbfcfc; padding-top: .6rem; padding-bottom: .6rem; }
 .vl-navbar .navbar-brand { color: #fff; font-weight: 700; display: flex; align-items: center; gap: .6rem; }
 .vl-navbar .navbar-brand .logo {
     width: 38px; height: 38px; border-radius: 10px; background: var(--vl-primary);
     display: grid; place-items: center; font-size: 1.15rem;
 }
 .vl-navbar .nav-link {
-    color: rgba(255, 255, 255, .78); font-weight: 500; border-radius: 8px;
+    color: #084298; font-weight: 700;; border-radius: 8px;
     padding: .6rem .9rem; min-height: 44px; display: flex; align-items: center;
 }
-.vl-navbar .nav-link:hover { color: #fff; background: rgba(255, 255, 255, .08); }
-.vl-navbar .nav-link.active { color: #fff; background: rgba(255, 255, 255, .15); }
+.vl-navbar .nav-link:hover { color: #3d4450; background: rgba(255, 255, 255, .08); }
+.vl-navbar .nav-link.active { color: #084298; background: rgba(255, 255, 255, .15); }
 .vl-navbar .navbar-toggler { border-color: rgba(255, 255, 255, .4); min-height: 44px; }
 
 .vl-footer { background: var(--vl-dark); color: rgba(255, 255, 255, .75); padding: 2.5rem 0 1.25rem; margin-top: 3rem; }

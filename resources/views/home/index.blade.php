@@ -9,27 +9,28 @@
     <div class="container">
         <div class="row align-items-center g-4">
             <div class="col-lg-7">
-                <span class="hero-tag"><i class="bi bi-stars"></i> Cùng nhau tạo nên điều tử tế</span>
-                <h1 class="hero-title">Trở thành tình nguyện viên, <span>lan tỏa yêu thương</span> đến cộng đồng</h1>
-                <p class="hero-lead">Tìm kiếm và đăng ký các hoạt động tình nguyện gần bạn: bảo vệ môi trường, dạy học, hiến máu, hỗ trợ người khó khăn và nhiều hơn nữa.</p>
+                <!-- <span class="hero-tag"><i class="bi bi-stars"></i> Cùng nhau tạo nên điều tử tế</span> -->
+                <!-- <h1 class="hero-title">Trở thành tình nguyện viên, <span>lan tỏa yêu thương</span> đến cộng đồng</h1>
+                <p class="hero-lead">Tìm kiếm và đăng ký các hoạt động tình nguyện gần bạn: bảo vệ môi trường, dạy học, hiến máu, hỗ trợ người khó khăn và nhiều hơn nữa.</p> -->
+              <div style="height: 180px;"></div>
                 <div class="d-grid gap-2 d-sm-flex">
-                    <a href="{{ route('register') }}" class="btn btn-accent btn-lg px-4">Đăng ký ngay</a>
+                    <!-- <a href="{{ route('register') }}" class="btn btn-accent btn-lg px-4">Đăng ký ngay</a> -->
                     <a href="{{ route('volunteer.activities') }}" class="btn btn-outline-light btn-lg px-4">Xem hoạt động</a>
                 </div>
             </div>
-            <div class="col-lg-5">
+            <!-- <div class="col-lg-5">
                 <div class="hero-stats">
                     <div class="hero-stat"><strong>500+</strong><span>Tình nguyện viên</span></div>
                     <div class="hero-stat"><strong>120</strong><span>Hoạt động</span></div>
                     <div class="hero-stat"><strong>3.000</strong><span>Giờ đóng góp</span></div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>
 
 {{-- ============ GIỚI THIỆU ============ --}}
-<section class="section" id="gioi-thieu">
+<!-- <section class="section" id="gioi-thieu">
     <div class="container">
         <div class="section-title">
             <h2>Vì sao chọn Tình Nguyện Xanh?</h2>
@@ -59,7 +60,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 {{-- ============ HOẠT ĐỘNG NỔI BẬT ============ --}}
 <section class="section pt-0">

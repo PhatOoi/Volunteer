@@ -17,6 +17,7 @@
 
 /* ---------- TRANG CHỦ: HERO ---------- */
 .hero {
+     height: 450px;
     background:
         linear-gradient(
             135deg,
