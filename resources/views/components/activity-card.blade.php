@@ -8,10 +8,12 @@
 
 <article class="vl-card activity-card">
     <div class="activity-thumb thumb-{{ $activity['color'] }}">
-        <i class="bi {{ $activity['icon'] }} thumb-icon"></i>
-        <x-badge :status="$activity['status']" class="badge-corner" />
-    </div>
+    <img src="{{ asset($activity['images']) }}"
+         alt="{{ $activity['title'] }}"
+         class="thumb-image">
 
+    <x-badge :status="$activity['status']" class="badge-corner" />
+</div>
     <div class="activity-body">
         <small class="text-primary fw-semibold">{{ $activity['category'] }}</small>
         <h3 class="activity-title">{{ $activity['title'] }}</h3>

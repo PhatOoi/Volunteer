@@ -12,9 +12,9 @@
     </nav>
 
     {{-- Banner --}}
-    <div class="detail-banner thumb-{{ $activity['color'] }}">
+    <!-- <div class="detail-banner thumb-{{ $activity['color'] }}">
         <i class="bi {{ $activity['icon'] }} thumb-icon"></i>
-    </div>
+    </div> -->
 
     <div class="row g-4">
 
@@ -106,42 +106,12 @@
                     @elseif ($activity['status'] === 'full')
                         <button type="button" class="btn btn-secondary btn-lg" disabled>Đã đủ số lượng</button>
                     @else
-                        <button type="button" class="btn btn-primary btn-lg"
-                                data-bs-toggle="modal" data-bs-target="#registerModal" data-name="{{ $activity['title'] }}">
+                        <a href="{{ route('volunteer.activities.register', $activity['id']) }}" class="btn btn-primary btn-lg">
                             Đăng ký tham gia
-                        </button>
+                        </a>
                     @endif
                 </div>
             </div>
-        </div>
-    </div>
-
-    {{-- ===== Modal xác nhận đăng ký ===== --}}
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <form class="modal-content" method="POST" action="{{ route('volunteer.activities.register', $activity['id']) }}">
-                @csrf
-                <div class="modal-header">
-                    <h5 class="modal-title" id="registerModalLabel">Đăng ký tham gia</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Bạn đang đăng ký tham gia hoạt động:<br><strong data-modal-name>{{ $activity['title'] }}</strong></p>
-                    <p class="text-muted small"><i class="bi bi-calendar-event me-1"></i>{{ $activity['date'] }} &middot; {{ $activity['time'] }}</p>
-
-                    <label for="note" class="form-label">Ghi chú cho ban tổ chức (không bắt buộc)</label>
-                    <textarea class="form-control mb-3" id="note" name="note" rows="3" placeholder="Ví dụ: Tôi có thể đến sớm 30 phút..."></textarea>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="agree" required>
-                        <label class="form-check-label" for="agree">Tôi cam kết tham gia đúng giờ và tuân thủ quy định.</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn btn-primary">Xác nhận đăng ký</button>
-                </div>
-            </form>
         </div>
     </div>
 

@@ -38,20 +38,35 @@
         </div>
     </div>
 
-    {{-- Hoạt động sắp tới --}}
+   {{-- Hoạt động sắp tới --}}
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4 class="mb-0">Hoạt động sắp tới</h4>
         <a href="{{ route('volunteer.my-activities') }}" class="small fw-semibold">Xem tất cả</a>
     </div>
 
-    @forelse ($upcoming as $row)
+    @if(count($upcoming) > 0)
+        <div class="row g-3 g-lg-4 mb-4">
+            @foreach ($upcoming as $row)
+                <div class="col-12 col-md-6 col-lg-4">
+                    <x-activity-card :activity="$row['activity']" />
+                </div>
+            @endforeach
+        </div>
+    @else
+        <div class="vl-card empty-state mb-4">
+            <i class="bi bi-calendar-x"></i>
+            Bạn chưa đăng ký hoạt động nào.
+        </div>
+    @endif
+
+    <!-- @forelse ($upcoming as $row)
         <x-activity-row :activity="$row['activity']" :status="$row['status']" />
     @empty
         <div class="vl-card empty-state">
             <i class="bi bi-calendar-x"></i>
             Bạn chưa đăng ký hoạt động nào.
         </div>
-    @endforelse
+    @endforelse -->
 
     {{-- Hoạt động nổi bật --}}
     <div class="d-flex justify-content-between align-items-center mt-4 mb-3">

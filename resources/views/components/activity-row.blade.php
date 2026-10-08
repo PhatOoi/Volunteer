@@ -5,7 +5,7 @@
 
 <div class="vl-card activity-row">
     <div class="row-thumb thumb-{{ $activity['color'] }}">
-        <i class="bi {{ $activity['icon'] }} thumb-icon"></i>
+     <img src="{{ asset($activity['images']) }}" alt="{{ $activity['title'] }}" class="thumb-icon">
     </div>
 
     <div class="row-body">

@@ -16,9 +16,12 @@
 {{-- ============ NAVBAR DÀNH CHO KHÁCH (chưa đăng nhập) ============ --}}
 <nav class="navbar navbar-expand-lg vl-navbar sticky-top" data-bs-theme="dark">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('home') }}">
-            <span class="logo"><i class="bi bi-heart-fill"></i></span> Tình Nguyện Xanh
-        </a>
+        <a href="{{ url('/') }}" class="navbar-brand vl-brand">
+    <span class="logo">
+        <img src="{{ asset('images/logo.png') }}" alt="Tình Nguyện Xanh">
+    </span>
+    <!-- <span class="brand-text">Tình Nguyện Xanh</span> -->
+</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#guestNav"
                 aria-controls="guestNav" aria-expanded="false" aria-label="Mở menu">
@@ -26,7 +29,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="guestNav">
-            <ul class="navbar-nav me-auto mt-3 mt-lg-0 gap-lg-1">
+            <ul class="navbar-nav mx-auto mt-3 mt-lg-0 gap-lg-1">
                 <li class="nav-item"><a href="{{ route('home') }}" @class(['nav-link', 'active' => request()->routeIs('home')])>Trang chủ</a></li>
                 <li class="nav-item"><a href="{{ route('home') }}#gioi-thieu" class="nav-link">Giới thiệu</a></li>
                 <li class="nav-item"><a href="{{ route('volunteer.activities') }}" class="nav-link">Hoạt động</a></li>

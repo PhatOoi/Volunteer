@@ -29,7 +29,9 @@
 <nav class="navbar navbar-expand-lg vl-navbar sticky-top" data-bs-theme="dark">
     <div class="container">
         <a class="navbar-brand" href="{{ route('volunteer.dashboard') }}">
-            <span class="logo"><i class="bi bi-heart-fill"></i></span> Tình Nguyện Xanh
+            <span class="logo">
+        <img src="{{ asset('images/logo.png') }}" alt="Tình Nguyện Xanh">
+    </span> 
         </a>
 
         {{-- Nút hamburger (hiện trên mobile) --}}
@@ -39,7 +41,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="volunteerNav">
-            <ul class="navbar-nav me-auto mt-3 mt-lg-0 gap-lg-1">
+            <ul class="navbar-nav mx-auto mt-3 mt-lg-0 gap-lg-1">
                 @foreach ($menu as [$route, $label, $pattern])
                     <li class="nav-item">
                         <a href="{{ route($route) }}" @class(['nav-link', 'active' => request()->routeIs($pattern)])>{{ $label }}</a>

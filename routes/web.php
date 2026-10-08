@@ -1,21 +1,22 @@
 <?php
 
-use App\Support\DemoData;
-use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Volunteer\ActivityController;
+use App\Http\Controllers\Volunteer\DashboardController;
+use App\Http\Controllers\Volunteer\HistoryController;
+use App\Http\Controllers\Volunteer\MyActivityController;
+use App\Http\Controllers\Volunteer\NotificationController;
+use App\Http\Controllers\Volunteer\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
 
-// Route cũ của Laravel (trang welcome) - giữ lại, đổi sang /welcome để nhường '/' cho trang chủ.
+// Route cũ của Laravel (trang welcome) - giữ lại
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -24,103 +25,45 @@ Route::get('/welcome', function () {
 |--------------------------------------------------------------------------
 | TRANG CHỦ + ĐĂNG NHẬP / ĐĂNG KÝ
 |--------------------------------------------------------------------------
-| Giai đoạn 2: các route POST chỉ để DEMO giao diện (chưa kiểm tra tài khoản thật).
-| Giai đoạn 5 sẽ thay bằng Controller + Authentication thật.
 */
-Route::get('/', function () {
-    // Lấy 3 hoạt động đầu tiên làm "hoạt động nổi bật"
-    return view('home.index', ['featured' => array_slice(DemoData::activities(), 0, 3)]);
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::view('/login', 'auth.login')->name('login');
-Route::post('/login', function () {
-    return redirect()->route('volunteer.dashboard');
-})->name('login.submit');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
-Route::view('/register', 'auth.register')->name('register');
-Route::post('/register', function () {
-    return redirect()->route('login')->with('success', 'Đăng ký thành công (bản demo)! Hãy đăng nhập.');
-})->name('register.submit');
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 
-Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
-Route::post('/forgot-password', function () {
-    return back()->with('success', 'Nếu email tồn tại, chúng tôi đã gửi hướng dẫn đặt lại mật khẩu (bản demo).');
-})->name('password.email');
+Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
 
 /*
 |--------------------------------------------------------------------------
 | KHU VỰC TÌNH NGUYỆN VIÊN  (/volunteer/...)
 |--------------------------------------------------------------------------
-| Giai đoạn 3: dữ liệu lấy từ DemoData (giả). Các route POST chỉ để demo,
-| giai đoạn 5 sẽ chuyển vào Controller và lưu vào database.
 */
 Route::prefix('volunteer')->name('volunteer.')->group(function () {
 
-    // Dashboard
-    Route::get('/dashboard', function () {
-        // 3 hoạt động nổi bật: id 2, 3, 5
-        $featured = array_values(array_filter(DemoData::activities(), fn ($a) => in_array($a['id'], [2, 3, 5])));
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        return view('volunteer.dashboard', [
-            'user' => DemoData::user(),
-            'stats' => DemoData::stats(),
-            'upcoming' => DemoData::myRegistrations(),
-            'featured' => $featured,
-        ]);
-    })->name('dashboard');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-    // Hồ sơ cá nhân
-    Route::get('/profile', function () {
-        return view('volunteer.profile', ['user' => DemoData::user(), 'stats' => DemoData::stats()]);
-    })->name('profile');
-    Route::post('/profile', function () {
-        return redirect()->route('volunteer.profile')->with('success', 'Đã lưu hồ sơ (bản demo, chưa lưu vào database).');
-    })->name('profile.update');
+    Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
+    Route::get('/activities/{id}', [ActivityController::class, 'show'])->name('activities.show');
+    Route::get('/activities/{id}/register', [ActivityController::class, 'registerForm'])->name('activities.register');
+    Route::post('/activities/{id}/register', [ActivityController::class, 'storeRegistration'])->name('activities.register.store');
 
-    // Danh sách hoạt động (có tìm kiếm + lọc)
-    Route::get('/activities', function (Request $request) {
-        return view('volunteer.activities', [
-            'activities' => DemoData::searchActivities($request->q, $request->category, $request->location, $request->time),
-            'categories' => DemoData::categories(),
-            'locations' => DemoData::locations(),
-            'months' => DemoData::months(),
-        ]);
-    })->name('activities');
+    Route::get('/my-activities', [MyActivityController::class, 'index'])->name('my-activities');
+    Route::post('/my-activities/cancel', [MyActivityController::class, 'cancel'])->name('my-activities.cancel');
 
-    // Chi tiết hoạt động + đăng ký
-    Route::get('/activities/{id}', function ($id) {
-        $activity = DemoData::activity((int) $id);
-        abort_if(!$activity, 404);   // không có hoạt động này thì báo 404
-
-        return view('volunteer.activity-detail', [
-            'activity' => $activity,
-            'isRegistered' => in_array($activity['id'], DemoData::registeredIds()),
-        ]);
-    })->name('activities.show');
-    Route::post('/activities/{id}/register', function ($id) {
-        return redirect()->route('volunteer.my-activities')->with('success', 'Đăng ký thành công (bản demo)! Vui lòng chờ ban tổ chức duyệt.');
-    })->name('activities.register');
-
-    // Hoạt động của tôi
-    Route::get('/my-activities', function () {
-        return view('volunteer.my-activities', ['registrations' => DemoData::myRegistrations()]);
-    })->name('my-activities');
-    Route::post('/my-activities/cancel', function () {
-        return back()->with('success', 'Đã hủy đăng ký (bản demo).');
-    })->name('my-activities.cancel');
-
-    // Lịch sử + Thông báo
-    Route::get('/history', function () {
-        return view('volunteer.history', ['history' => DemoData::history(), 'stats' => DemoData::stats()]);
-    })->name('history');
-    Route::get('/notifications', function () {
-        return view('volunteer.notifications', ['notifications' => DemoData::notifications()]);
-    })->name('notifications');
+    Route::get('/history', [HistoryController::class, 'index'])->name('history');
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 });
 
 /*
 |--------------------------------------------------------------------------
-| KHU VỰC QUẢN TRỊ  (/admin/...)
+| KHU VỰC QUẢN TRỊ  (/admin/...)  - giữ nguyên, không thuộc phần việc của bạn
 |--------------------------------------------------------------------------
 */
 Route::prefix('admin')->name('admin.')->group(function () {

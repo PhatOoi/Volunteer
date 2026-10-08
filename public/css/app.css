@@ -273,3 +273,44 @@ textarea.form-control { min-height: 100px; }
     .vl-card-body { padding: 1rem; }
     .page-container { padding-top: 1.25rem; }
 }
+/* =====================================================
+   LOGO TÌNH NGUYỆN XANH
+   ===================================================== */
+
+.vl-navbar .navbar-brand.vl-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Khung logo */
+.vl-navbar .navbar-brand .logo {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+
+    background: transparent;
+    border-radius: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Ảnh logo */
+.vl-navbar .navbar-brand .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Chữ Tình Nguyện Xanh */
+.vl-navbar .navbar-brand .brand-text {
+    font-weight: 700;
+    font-size: 1.05rem;
+    white-space: nowrap;
+}
