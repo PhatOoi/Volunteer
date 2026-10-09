@@ -27,12 +27,19 @@
 
 {{-- ============ NAVBAR ============ --}}
 <nav class="navbar navbar-expand-lg vl-navbar sticky-top" data-bs-theme="dark">
-    <div class="container">
-        <a class="navbar-brand" href="{{ route('volunteer.dashboard') }}">
-            <span class="logo">
+        <div class="container">
+        <a href="{{ url('/') }}" class="navbar-brand vl-brand">
+    <span class="logo">
         <img src="{{ asset('images/logo.png') }}" alt="Tình Nguyện Xanh">
-    </span> 
-        </a>
+    </span>
+    <!-- <span class="brand-text">Tình Nguyện Xanh</span> -->
+</a>
+ <a href="{{ url('/') }}" class="navbar-brand vl-brand">
+    <span class="logo">
+        <img src="{{ asset('images/logoso.png') }}" alt="Tình Nguyện Xanh">
+    </span>
+    <!-- <span class="brand-text">Tình Nguyện Xanh</span> -->
+</a>
 
         {{-- Nút hamburger (hiện trên mobile) --}}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#volunteerNav"

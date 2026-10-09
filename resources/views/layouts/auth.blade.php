@@ -11,46 +11,73 @@
     <link href="{{ asset('css/pages.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
-<div class="auth-wrap">
-
-    {{-- Cột trái: chỉ hiện trên màn hình lớn --}}
-    <aside class="auth-side">
-        <a href="{{ route('home') }}" class="auth-brand">
-            <span class="logo"><i class="bi bi-heart-fill"></i></span> Tình Nguyện Xanh
+{{-- ============ THANH MENU (NAVBAR) ============ --}}
+<nav class="navbar navbar-expand-lg vl-navbar sticky-top" data-bs-theme="dark">
+    <div class="container">
+        <!-- Logo kép (giống trang chủ) -->
+        <a href="{{ url('/') }}" class="navbar-brand vl-brand d-flex align-items-center gap-2">
+            <span class="logo"><img src="{{ asset('images/logo.png') }}" alt="Logo 1"></span>
+            <span class="logo"><img src="{{ asset('images/logoso.png') }}" alt="Logo 2"></span>
         </a>
 
-        <div>
-            <h2>Cùng nhau làm nên<br>những điều tử tế</h2>
-            <ul>
-                <li><i class="bi bi-check-circle-fill"></i> Tìm hoạt động tình nguyện phù hợp với bạn</li>
-                <li><i class="bi bi-check-circle-fill"></i> Đăng ký tham gia chỉ với vài thao tác</li>
-                <li><i class="bi bi-check-circle-fill"></i> Theo dõi số giờ tình nguyện và thành tích</li>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#guestNav"
+                aria-controls="guestNav" aria-expanded="false" aria-label="Mở menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="guestNav">
+            <ul class="navbar-nav mx-auto mt-3 mt-lg-0 gap-lg-1">
+                <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">Trang chủ</a></li>
+                <li class="nav-item"><a href="{{ route('home') }}#gioi-thieu" class="nav-link">Giới thiệu</a></li>
+                <li class="nav-item"><a href="{{ route('volunteer.activities') }}" class="nav-link">Hoạt động</a></li>
+                <li class="nav-item"><a href="{{ route('home') }}#cach-tham-gia" class="nav-link">Cách tham gia</a></li>
             </ul>
-        </div>
 
-        <small class="opacity-75">&copy; {{ date('Y') }} Tình Nguyện Xanh</small>
-    </aside>
-
-    {{-- Cột phải: form --}}
-    <div class="auth-main">
-        <div class="auth-box">
-            {{-- Logo cho mobile (cột trái đã bị ẩn) --}}
-            <a href="{{ route('home') }}" class="auth-brand auth-brand-mobile d-lg-none">
-                <span class="logo"><i class="bi bi-heart-fill"></i></span> Tình Nguyện Xanh
-            </a>
-
-            @include('partials.flash')
-            @yield('content')
+            <div class="d-grid gap-2 d-lg-flex mt-3 mt-lg-0">
+                <a href="{{ route('login') }}" class="btn btn-accent">Đăng nhập</a>
+            </div>
         </div>
     </div>
-</div>
+</nav>
+
+{{-- ============ NỘI DUNG CHÍNH (FORM ĐĂNG NHẬP/ĐĂNG KÝ) ============ --}}
+<main class="flex-grow-1 d-flex align-items-center justify-content-center py-4">
+    <div class="container">
+        <div class="auth-wrap shadow rounded overflow-hidden">
+            
+            {{-- Cột trái: Hình nền / Slogan (chỉ hiện trên màn hình lớn) --}}
+            <aside class="auth-side">
+                <div>
+                    <h2>Cùng nhau làm nên<br>những điều tử tế</h2>
+                    <ul class="list-unstyled mt-3">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill"></i> Tìm hoạt động tình nguyện phù hợp với bạn</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill"></i> Đăng ký tham gia chỉ với vài thao tác</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Theo dõi số giờ tình nguyện và thành tích</li>
+                    </ul>
+                </div>
+                <small class="opacity-75">&copy; {{ date('Y') }} Tình Nguyện Xanh</small>
+            </aside>
+
+            {{-- Cột phải: Form chứa nội dung yield --}}
+            <div class="auth-main p-4 p-lg-5 bg-white">
+                <div class="auth-box">
+                    @include('partials.flash')
+                    @yield('content')
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+@include('partials.footer')
 
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
-    // Nút hiện/ẩn mật khẩu: <button data-toggle-password="#idCuaO">
+    // Nút hiện/ẩn mật khẩu
     document.querySelectorAll('[data-toggle-password]').forEach(function (btn) {
         btn.addEventListener('click', function () {
             var input = document.querySelector(btn.getAttribute('data-toggle-password'));
